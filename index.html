@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="script.js" defer></script>
+
+    <link href="style.css" rel="stylesheet">
+    <title>Générateur de mot de passe</title>
+
+</head>
+<body>
+
+    <h2>Votre mot de passe</h2>
+
+    <p>Mot de passe : </p>
+
+    <p>Faites clisser le curseur dans la barre pour définir la longuer de votre mot de passe</p>
+
+    <p id="passSize"></p>
+
+    <div class="progress-bar">
+        <div class="progress"></div>
+
+    </div>
+
+    <div>
+        <input type="checkbox" id="lower" name="composition">
+        <label for="lower" >contient des caractère minuscules</label>
+        <br>
+
+        <input type="checkbox" id="upper" name="composition">
+        <label for="upper" >contient des caractère majuscules</label>
+        <br>
+
+        <input type="checkbox" id="numbers" name="composition">
+        <label for="numbers" >contient des nombres</label>
+        <br>
+
+        <input type="checkbox" id="special" name="composition">
+        <label for="special" >contient des des sympboles spéciaux</label>
+    </div>
+
+</body>
+</html>
