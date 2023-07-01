@@ -2,30 +2,31 @@ class PassWordGenerator {
     constructor(progressBar, progress) {
         this.progressBar = document.querySelector(progressBar);
         this.progress = document.querySelector(progress);
-
         this.lengthPassWord = 0;
         this.choiceUpperCase = false;
         this.choiceLowerCase = false;
         this.choiceNumber = false;
         this.choiceSpecialsCar = false;
-
         this.progressNumber = 0;
 
-        this.progressBarValue();
-        this.progressBarValue();
-        this.monitoringChoice();
-        this.randomLetters();
+        this.progressBarValue().then(() => {
+            this.monitoringChoice();
+            this.randomLetters();
+        });
     }
 
     progressBarValue() {
-        this.progressBar.addEventListener('click', (event) => {
-            const progressBarWidth = this.progressBar.offsetWidth;
-            const clickX = event.offsetX;
-            const progressWidth = (clickX / progressBarWidth) * 100;
-            this.progress.style.width = progressWidth + '%';
-            this.progressNumber = Math.round(progressWidth);
-            console.log(this.progressNumber);
-
+        return new Promise((resolve, reject) => {
+            this.progressBar.addEventListener('click', (event) => {
+                const progressBarWidth = this.progressBar.offsetWidth;
+                const clickX = event.offsetX;
+                const progressWidth = (clickX / progressBarWidth) * 100;
+                this.progress.style.width = progressWidth + '%';
+                this.progressNumber = Math.round(progressWidth);
+               // console.log(this.progressNumber);
+                this.randomLetters();
+                resolve();
+            });
         });
     }
 
@@ -50,35 +51,30 @@ class PassWordGenerator {
     }
 
     randomLetters() {
-        const x = this.progressBarValue()
-        console.log(x);
+//        const x = this.progressNumber;
+
+        const p = document.createElement("p");
+        const maxCar = this.progressNumber;
+
+        let tableauCar = [];
+        let min = 65;
+        let max = 90;
+
+        for (let i= 0; i < maxCar; i++){
+            let randomNombre = Math.floor(Math.random()*(max -min)+min);
+            let carAlea = String.fromCharCode((randomNombre));
+            tableauCar.push(carAlea);
+        }
+        //console.log(tableauCar);
+    //        const li = document.createElement("li");
     }
 }
 
 const pass = new PassWordGenerator('.progress-bar', '.progress');
 
 
-
-
-
 /*
 -----------------------------------------------------------------------------------------------------------
-function cryptosor(){
-const maxCar = 10;
-
-let tableauCar =[];
-let min = 65;
-let max = 90;
-
-for (let i= 0; i < maxCar; i++){
-let randomNombre = Math.floor(Math.random()*(max -min)+min);
-let carAlea = String.fromCharCode((randomNombre));
-tableauCar.push(carAlea);
-}
-console.log(tableauCar);
-
-}
-cryptosor();
 
 surveiller la valeur des checkbox cochés
 
