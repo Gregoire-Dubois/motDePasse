@@ -57,16 +57,15 @@ class PassWordGenerator {
         const maxCar = this.progressNumber;
 
         let tableauCar = [];
-        let min = 65;
-        let max = 90;
+        let min = 48;
+        let max = 126;
 
         for (let i= 0; i < maxCar; i++){
             let randomNombre = Math.floor(Math.random()*(max -min)+min);
             let carAlea = String.fromCharCode((randomNombre));
             tableauCar.push(carAlea);
         }
-        //console.log(tableauCar);
-    //        const li = document.createElement("li");
+        document.getElementById("pass").innerText = tableauCar.join("").toString();
     }
 }
 
