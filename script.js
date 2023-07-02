@@ -8,11 +8,14 @@ class PassWordGenerator {
         this.choiceNumber = false;
         this.choiceSpecialsCar = false;
         this.progressNumber = 0;
+        this.validateCheckBox = 0;
+        this.resultPass = [];
 
         this.progressBarValue().then(() => {
             this.monitoringChoice();
             this.randomLetters();
         });
+
     }
 
     progressBarValue() {
@@ -23,7 +26,6 @@ class PassWordGenerator {
                 const progressWidth = (clickX / progressBarWidth) * 100;
                 this.progress.style.width = progressWidth + '%';
                 this.progressNumber = Math.round(progressWidth);
-               // console.log(this.progressNumber);
                 this.randomLetters();
                 resolve();
             });
@@ -34,31 +36,63 @@ class PassWordGenerator {
         let nbCriteria = 0;
         const compositionCheckboxes = document.querySelectorAll('input[name="composition"]');
 
-        compositionCheckboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
+        compositionCheckboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
                 if (checkbox.checked) {
                     console.log('La case à cocher avec la valeur ' + checkbox.id + ' est cochée.');
                     nbCriteria++;
-                    console.log(checkbox.id);
-                    console.log(nbCriteria);
+
+                    if (checkbox.id === "lower") {
+                        this.choiceLowerCase = true;
+                        this.randomLetters(97, 122);
+                    }
+
+                    if (checkbox.id === "upper") {
+                        this.choiceUpperCase = true;
+                        console.log(this.choiceUpperCase);
+                        this.randomLetters(65, 90);
+
+                    }
+
+                    if (checkbox.id === "numbers") {
+                        this.choiceNumber = true;
+                        console.log(this.choiceNumber);
+
+                        this.randomLetters(48, 57);
+
+                    }
+
+                    if (checkbox.id === "special") {
+                        this.choiceSpecialsCar = true;
+                        console.log(this.choiceSpecialsCar);
+                        this.randomLetters(33, 47);
+
+                    }
+                    console.log("-->",nbCriteria);
+
+
+
                 } else {
                     console.log('La case à cocher avec la valeur ' + checkbox.id + ' est décochée.');
                     nbCriteria--;
-                    console.log(nbCriteria);
+                    console.log("-->",nbCriteria);
+
                 }
             });
+            console.log("-->",nbCriteria);
+
         });
     }
 
-    randomLetters() {
+    randomLetters(rangeMin, rangeMax) {
 //        const x = this.progressNumber;
 
         const p = document.createElement("p");
         const maxCar = this.progressNumber;
 
         let tableauCar = [];
-        let min = 48;
-        let max = 126;
+        let min = rangeMin;
+        let max = rangeMax;
 
         for (let i= 0; i < maxCar; i++){
             let randomNombre = Math.floor(Math.random()*(max -min)+min);
